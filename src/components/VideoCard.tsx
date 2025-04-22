@@ -86,14 +86,15 @@ export default function VideoCard({ reel }: any) {
    }
 
     return (
-        <div className="h-screen relative bg-black flex items-center justify-center">
+        <div className="h-screen w-full flex bg-black flex items-center justify-center">
+            <div className="relative h-full aspect-[9/16] max-w-[420px] w-full" >
             <video
                 ref={videoRef}
                 src={videoUrl.toString()}
                 muted
                 loop
                 playsInline
-                className="h-full object-cover"
+                className="h-full w-full object-cover"
                 onClick={handleClick}
             />
 
@@ -132,6 +133,7 @@ export default function VideoCard({ reel }: any) {
                 >
                     Delete
                 </button>
+            </div>
             </div>
         </div>
     );
