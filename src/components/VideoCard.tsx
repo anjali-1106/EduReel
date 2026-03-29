@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { storage, databases, account } from "@/lib/appwrite";
 import { ID } from "appwrite";
 
+
 export default function VideoCard({ reel }: any) {
     const videoRef = useRef<HTMLVideoElement | null>(null);
     const [isEditing, setIsEditing] = useState(false);
@@ -76,6 +77,14 @@ export default function VideoCard({ reel }: any) {
         }
     };
 
+   const handleClick=()=>{
+    if(videoRef.current){
+    videoRef.current.muted=false;
+    videoRef.current.play();
+    }
+
+   }
+
     return (
         <div className="h-screen relative bg-black flex items-center justify-center">
             <video
@@ -85,6 +94,7 @@ export default function VideoCard({ reel }: any) {
                 loop
                 playsInline
                 className="h-full object-cover"
+                onClick={handleClick}
             />
 
             <div className="absolute bottom-10 left-5 text-white">
