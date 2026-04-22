@@ -10,7 +10,7 @@ export default function VideoCard({ reel }: any) {
     const [isEditing, setIsEditing] = useState(false);
     const [newTitle, setNewTitle] = useState(reel.title);
 
-    const videoUrl = storage.getFilePreview(
+    const videoUrl = storage.getFileView(
         process.env.NEXT_PUBLIC_BUCKET_ID!,
         reel.videoId
     );
