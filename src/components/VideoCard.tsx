@@ -23,15 +23,25 @@ export default function VideoCard({ reel }: any) {
         const observer = new IntersectionObserver(
             (entries) => {
                 entries.forEach((entry) => {
-                    if (entry.isIntersecting) video.play();
-                    else video.pause();
+                    if (entry.isIntersecting) {
+                        if(video.paused){
+                            video.play().catch((err)=>{
+                                console.log("play error",err);
+                            })
+                        }
+                    }else{
+                        if(!video.pause){
+                            video.pause();
+                        }
+                    }
+                    
                 });
             },
             { threshold: 0.7 }
         );
 
         observer.observe(video);
-        return () => observer.disconnect();
+        return () => observer.unobserve(video);
     }, []);
 
     // 🗑 DELETE
@@ -78,10 +88,12 @@ export default function VideoCard({ reel }: any) {
     };
 
    const handleClick=()=>{
-    if(videoRef.current){
-    videoRef.current.muted=false;
-    videoRef.current.play();
-    }
+   const video =videoRef.current;
+   if(!video) return;
+   video.muted=false;
+   video.play().catch((err)=>{
+    console.log("play err",err);
+   })
 
    }
 
@@ -93,6 +105,7 @@ export default function VideoCard({ reel }: any) {
                 src={videoUrl.toString()}
                 muted
                 loop
+                autoPlay
                 playsInline
                 className="h-full w-full object-cover"
                 onClick={handleClick}
