@@ -98,8 +98,8 @@ export default function VideoCard({ reel }: any) {
    }
 
     return (
-        <div className="h-screen w-full flex bg-black flex items-center justify-center">
-            <div className="relative h-screen  w-full" >
+        <div className="h-screen w-full  bg-black flex items-center justify-center">
+            <div className="relative h-screen  w-full sm:max-w-md  sm:aspect-[9/16] sm:h-auto" >
             <video
                 ref={videoRef}
                 src={videoUrl.toString()}
